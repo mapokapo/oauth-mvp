@@ -2,12 +2,12 @@ import { Hono } from "hono";
 import oauthMiddleware from "../middleware/oauthMiddleware";
 
 const apiRouter = new Hono()
-  .get("/private-route", oauthMiddleware, (c) => {
+  .get("/private", oauthMiddleware, (c) => {
     const jwtPayload = c.get("jwtPayload");
 
     return c.text(`Hello user with ID ${jwtPayload.sub}`);
   })
-  .get("public-route", (c) => {
+  .get("public", (c) => {
     return c.text("Hello unknown user");
   });
 

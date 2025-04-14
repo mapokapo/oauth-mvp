@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@cross/jwt": "npm:@jsr/cross__jwt",
+    "@hono/zod-validator": "^0.4.3",
     "hono": "^4.7.6"
   }
 }

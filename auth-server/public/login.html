@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      /* Reset and basic styles */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .login-form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 320px;
+      }
+
+      .login-form h2 {
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .login-form label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .login-form input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .login-form button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .login-form button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .login-form button#google-login {
+        background-color: #fff;
+        color: #444;
+        border: 1px solid #ccc;
+      }
+
+      .login-form button#google-login:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form
+        id="login-form"
+        method="POST"
+        action="/authorize"
+        class="login-form"
+      >
+        <h2>Sign In</h2>
+
+        <label>
+          Email
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+
+        <label>
+          Password
+          <input
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+        </label>
+
+        <!-- Hidden OAuth2 fields -->
+        <input type="hidden" name="response_type" id="response_type" />
+        <input type="hidden" name="client_id" id="client_id" />
+        <input type="hidden" name="redirect_uri" id="redirect_uri" />
+        <input type="hidden" name="scope" id="scope" />
+        <input type="hidden" name="state" id="state" />
+        <input type="hidden" name="code_challenge" id="code_challenge" />
+        <input
+          type="hidden"
+          name="code_challenge_method"
+          id="code_challenge_method"
+        />
+
+        <button type="submit">Log In</button>
+        <button type="button" id="google-login">Sign in with Google</button>
+      </form>
+    </div>
+
+    <script>
+      // Populate hidden inputs from URL params
+      const params = new URLSearchParams(window.location.search);
+      [
+        "response_type",
+        "client_id",
+        "redirect_uri",
+        "scope",
+        "state",
+        "code_challenge",
+        "code_challenge_method",
+      ].forEach((name) => {
+        const el = document.getElementById(name);
+        if (el) el.value = params.get(name) || "";
+      });
+
+      // Google login: redirect to Google OAuth entrypoint
+      document.getElementById("google-login").addEventListener("click", () => {
+        const url = new URL("/oauth2/authorize/google", window.location.origin);
+        [
+          "client_id",
+          "redirect_uri",
+          "scope",
+          "state",
+          "code_challenge",
+          "code_challenge_method",
+        ].forEach((name) => {
+          const v = params.get(name);
+          if (v) url.searchParams.set(name, v);
+        });
+        window.location.href = url.toString();
+      });
+    </script>
+  </body>
+</html>
