@@ -1,4 +1,3 @@
-// src/pages/Register.tsx
 import React, { useState } from "react";
 
 const RegisterPage: React.FC = () => {

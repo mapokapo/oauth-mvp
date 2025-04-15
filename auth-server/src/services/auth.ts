@@ -3,7 +3,6 @@ import { db } from "./db";
 export type User = { sub: string; email: string; password_hash: string };
 export type UserWithoutPassword = Omit<User, "password_hash">;
 
-// Create a new user (returns sub & email)
 export const createUser = async (
   email: string,
   password: string

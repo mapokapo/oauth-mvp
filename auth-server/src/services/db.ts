@@ -1,10 +1,8 @@
-// src/services/db.ts
 import { Database } from "bun:sqlite";
 
-// Opens (or creates) ./data/db.sqlite
+// In-memory DB
 export const db = new Database();
 
-// Auto‑migrate on import
 db.run(`
   CREATE TABLE IF NOT EXISTS users (
     sub           TEXT PRIMARY KEY,

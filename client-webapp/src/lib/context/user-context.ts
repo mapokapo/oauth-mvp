@@ -1,12 +1,10 @@
 import { createContext } from "react";
 
-// shape of your user object returned from /userinfo
 export interface User {
   sub: string;
   email: string;
 }
 
-// what the context will expose
 export interface UserContextValue {
   user: User | null;
   setUser: (user: User | null) => void;
