@@ -12,7 +12,7 @@ const RootLayout: React.FC = () => {
           <Outlet />
         </main>
         <footer className="bg-gray-800 text-white p-4">
-          <p>&copy; 2023 My App</p>
+          <p>&copy; 2025 My App</p>
         </footer>
       </div>
     </UserProvider>

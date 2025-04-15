@@ -27,6 +27,10 @@ export const routes: RouteObject[] = [
         element: <ProfilePage />,
       },
       {
+        path: "/",
+        element: <Navigate to="/login" replace />,
+      },
+      {
         path: "*",
         element: <Navigate to="/login" replace />,
       },
