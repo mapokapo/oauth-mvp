@@ -4,6 +4,7 @@ import LoginPage from "../page/login-page";
 import ProfilePage from "../page/profile-page";
 import RegisterPage from "../page/register-page";
 import RootLayout from "../layouts/root-layout";
+import PublicNotePage from "../page/public-note-page";
 
 export const routes: RouteObject[] = [
   {
@@ -25,6 +26,10 @@ export const routes: RouteObject[] = [
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/public-note",
+        element: <PublicNotePage />,
       },
       {
         path: "/",

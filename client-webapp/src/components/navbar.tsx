@@ -25,11 +25,21 @@ const Navbar: React.FC = () => {
             </>
           )}
           {user !== null && (
-            <li>
-              <Link to="/profile" className="hover:text-gray-300">
-                Profile
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link to="/profile" className="hover:text-gray-300">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/public-note?note=<button style='background-color: blue; border: 1px solid black; padding: 0.5rem 1rem; border-radius: 0.5rem; color: white; font-weight: bold; cursor: pointer;'>This is a button from the public note</button>"
+                  className="hover:text-gray-300"
+                >
+                  Visit sample public note
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
