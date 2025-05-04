@@ -18,7 +18,7 @@ export const generateAuthorizationCode = ({
 }) => {
   const code = crypto.randomUUID();
   const statement = db.prepare<CodeRecord, Record<string, string>>(
-    `INSERT INTO auth_codes (code, client_id, redirect_uri, sub) VALUES ($code, $codeChallenge, $clientId, $redirectUri, $sub)`
+    `INSERT INTO auth_codes (code, client_id, redirect_uri, sub) VALUES ($code, $clientId, $redirectUri, $sub)`
   );
   statement.run({
     $code: code,

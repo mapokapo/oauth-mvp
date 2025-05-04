@@ -25,7 +25,7 @@ const tokenRouter = new Hono().post(
       data.clientId !== client_id ||
       data.redirectUri !== redirect_uri
     ) {
-      console.log("Invalid code or redirect_uri");
+      console.log("Invalid authorization code");
       return c.json({ error: "invalid_grant" }, 400);
     }
 
