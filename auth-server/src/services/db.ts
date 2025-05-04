@@ -12,7 +12,6 @@ db.run(`
 
   CREATE TABLE IF NOT EXISTS auth_codes (
     code           TEXT PRIMARY KEY,
-    code_challenge TEXT NOT NULL,
     client_id      TEXT NOT NULL,
     redirect_uri   TEXT NOT NULL,
     sub            TEXT NOT NULL,

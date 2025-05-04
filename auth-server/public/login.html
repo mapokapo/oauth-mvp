@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <style>
-      /* Reset and basic styles */
       *,
       *::before,
       *::after {
@@ -112,18 +111,11 @@
           />
         </label>
 
-        <!-- Hidden OAuth2 fields -->
         <input type="hidden" name="response_type" id="response_type" />
         <input type="hidden" name="client_id" id="client_id" />
         <input type="hidden" name="redirect_uri" id="redirect_uri" />
         <input type="hidden" name="scope" id="scope" />
         <input type="hidden" name="state" id="state" />
-        <input type="hidden" name="code_challenge" id="code_challenge" />
-        <input
-          type="hidden"
-          name="code_challenge_method"
-          id="code_challenge_method"
-        />
 
         <button type="submit">Log In</button>
         <button type="button" id="google-login">Sign in with Google</button>
@@ -131,32 +123,18 @@
     </div>
 
     <script>
-      // Populate hidden inputs from URL params
       const params = new URLSearchParams(window.location.search);
-      [
-        "response_type",
-        "client_id",
-        "redirect_uri",
-        "scope",
-        "state",
-        "code_challenge",
-        "code_challenge_method",
-      ].forEach((name) => {
-        const el = document.getElementById(name);
-        if (el) el.value = params.get(name) || "";
-      });
+      ["response_type", "client_id", "redirect_uri", "scope", "state"].forEach(
+        (name) => {
+          const el = document.getElementById(name);
+          if (el) el.value = params.get(name) || "";
+        }
+      );
 
       // Google login: redirect to Google OAuth entrypoint
       document.getElementById("google-login").addEventListener("click", () => {
         const url = new URL("/oauth2/authorize/google", window.location.origin);
-        [
-          "client_id",
-          "redirect_uri",
-          "scope",
-          "state",
-          "code_challenge",
-          "code_challenge_method",
-        ].forEach((name) => {
+        ["client_id", "redirect_uri", "scope", "state"].forEach((name) => {
           const v = params.get(name);
           if (v) url.searchParams.set(name, v);
         });
